@@ -41,7 +41,8 @@ public class HotelResource {
             dao.insertarHotel(hotel);
             return Response.status(Response.Status.CREATED).entity("Hotel insertado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al insertar el hotel: " + e.getMessage()).build();
         }
     }
     
@@ -51,18 +52,20 @@ public class HotelResource {
             dao.actualizarHotel(hotel);
             return Response.ok("Hotel actualizado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al actualizar el hotel: " + e.getMessage()).build();
         }
     }
     
     @DELETE
-    @Path("/id")
+    @Path("{id}")
     public Response eliminarHotel(@PathParam("id") int id){
         try {
             dao.eliminarHotel(id);
-            return Response.ok("Hotel Eliminado Correctamente").build();
+            return Response.ok("Hotel eliminado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al eliminar el hotel: " + e.getMessage()).build();
         }
     }
 }

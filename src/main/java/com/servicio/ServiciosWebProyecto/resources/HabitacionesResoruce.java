@@ -39,9 +39,11 @@ public class HabitacionesResoruce {
     public Response insertarHabitacion(Habitaciones habitacion){
         try {
             dao.insertarHabitacion(habitacion);
-            return Response.status(Response.Status.CREATED).entity("habitacion insertada correctamente").build();
+            return Response.status(Response.Status.CREATED)
+                    .entity("Habitación insertada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al insertar la habitación: " + e.getMessage()).build();
         }
     }
     
@@ -49,20 +51,22 @@ public class HabitacionesResoruce {
     public Response actualizarHabitacion(Habitaciones habitacion){
         try {
             dao.actualizarHabitacion(habitacion);
-            return Response.ok("habitacion actualizada correctamente").build();
+            return Response.ok("Habitación actualizada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al actualizar la habitación: " + e.getMessage()).build();
         }
     }
     
     @DELETE
-    @Path("/id")
+    @Path("{id}")
     public Response eliminarHabitacion(@PathParam("id") int id){
         try {
             dao.eliminarHabitacion(id);
-            return Response.ok("Habitacion Eliminada Correctamente").build();
+             return Response.ok("Habitación eliminada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al eliminar la habitación: " + e.getMessage()).build();
         }
     }
 }

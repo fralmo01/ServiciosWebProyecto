@@ -53,7 +53,8 @@ public class ClienteResource {
             dao.insertarCliente(cli);
             return Response.status(Response.Status.CREATED).entity("Cliente insertado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al insertar el cliente: " + e.getMessage()).build();
         }
     }
     
@@ -63,18 +64,20 @@ public class ClienteResource {
             dao.actualizarCliente(cli);
             return Response.ok("Cliente actualizado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al actualizar el cliente: " + e.getMessage()).build();
         }
     }
     
     @DELETE
-    @Path("/id")
+    @Path("{id}")
     public Response eliminarCliente(@PathParam("id") int id){
         try {
             dao.eliminarCliente(id);
-            return Response.ok("Cliente eliminado Correctamente").build();
+            return Response.ok("Cliente eliminado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al eliminar el cliente: " + e.getMessage()).build();
         }
     }
 }

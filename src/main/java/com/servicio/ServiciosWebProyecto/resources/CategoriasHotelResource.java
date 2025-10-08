@@ -39,9 +39,10 @@ public class CategoriasHotelResource {
     public Response insertarCategoria(CategoriasHotel categoria){
         try {
             dao.insertarCategoria(categoria);
-            return Response.status(Response.Status.CREATED).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.CREATED).entity("Categoría insertada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al insertar la categoría: " + e.getMessage()).build();
         }
     }
     
@@ -49,20 +50,22 @@ public class CategoriasHotelResource {
     public Response actualizarCategoria(CategoriasHotel categoria){
         try {
             dao.actualizarCategoria(categoria);
-            return Response.ok("Categoria actualizada correctamente").build();
+            return Response.ok("Categoría actualizada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al actualizar la categoría: " + e.getMessage()).build();
         }
     }
     
     @DELETE
-    @Path("/id")
+    @Path("{id}")
     public Response eliminarCategoria(@PathParam("id") int id){
         try {
             dao.eliminarCategoria(id);
-            return Response.ok("Categoria Eliminada Correctamente").build();
+            return Response.ok("Categoría eliminada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al eliminar la categoría: " + e.getMessage()).build();
         }
     }
 }

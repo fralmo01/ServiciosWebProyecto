@@ -28,9 +28,11 @@ public class ReservacionesResource {
     public Response insertarReservaciones(Reservaciones reservacion){
         try {
             dao.insertarReserva(reservacion);
-            return Response.status(Response.Status.CREATED).entity("Reservacion insertada correctamente").build();
+            return Response.status(Response.Status.CREATED)
+                    .entity("Reservación insertada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al insertar la reservación: " + e.getMessage()).build();
         }
     }
     
@@ -38,20 +40,22 @@ public class ReservacionesResource {
     public Response actualizarReservacion(Reservaciones reservacion){
         try {
             dao.actualizarReserva(reservacion);
-            return Response.ok("Reservacion actualizada correctamente").build();
+            return Response.ok("Reservación actualizada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al actualizar la reservación: " + e.getMessage()).build();
         }
     }
     
     @DELETE
-    @Path("/id")
+    @Path("{id}")
     public Response eliminarReservacion(@PathParam("id") int id){
         try {
             dao.eliminarReserva(id);
-            return Response.ok("Reservacion Eliminada Correctamente").build();
+            return Response.ok("Reservación eliminada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al eliminar la reservación: " + e.getMessage()).build();
         }
     }
 }

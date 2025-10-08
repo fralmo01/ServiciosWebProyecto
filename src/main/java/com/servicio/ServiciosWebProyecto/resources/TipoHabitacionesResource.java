@@ -14,7 +14,7 @@ import java.util.List;
 public class TipoHabitacionesResource {
     private final TipoHabitacionesDao dao = new TipoHabitacionesDao();
     
-     @GET
+    @GET
     public Response listarTipoHabitacion(){
         List<TipoHabitaciones> lista = dao.listarTipoHabitaciones();
         if(lista != null && !lista.isEmpty()){
@@ -39,9 +39,11 @@ public class TipoHabitacionesResource {
     public Response insertarTipoHabitacion(TipoHabitaciones tipo){
         try {
             dao.insertarTipoHabitacion(tipo);
-            return Response.status(Response.Status.CREATED).entity("tipo de habitacion insertado correctamente").build();
+            return Response.status(Response.Status.CREATED)
+                    .entity("Tipo de habitación insertado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al insertar el tipo de habitación: " + e.getMessage()).build();
         }
     }
     
@@ -49,20 +51,22 @@ public class TipoHabitacionesResource {
     public Response actualizarTipoHabitacion(TipoHabitaciones tipo){
         try {
             dao.actualizarTipoHabitacion(tipo);
-            return Response.ok("Tipo de habitacion actualizado correctamente").build();
+            return Response.ok("Tipo de habitación actualizado correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al actualizar el tipo de habitación: " + e.getMessage()).build();
         }
     }
     
     @DELETE
-    @Path("/id")
+    @Path("{id}")
     public Response eliminarTipoHabitacion(@PathParam("id") int id){
         try {
             dao.eliminarTipoHabitacion(id);
-            return Response.ok("tipo de habitacion Eliminada Correctamente").build();
+            return Response.ok("Tipo de habitación eliminada correctamente").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Categoria insertada correctamente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al eliminar el tipo de habitación: " + e.getMessage()).build();
         }
     }
 }
