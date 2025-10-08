@@ -34,7 +34,7 @@ public class ReservacionesDao {
         try (Session sn = HibernateUtilSingle.obtenerSessionFactory().openSession()) {
             
             Transaction tx = sn.beginTransaction();
-            sn.merge(reserva);
+            tx.commit();
         } catch (Exception e) {
             System.out.println("Error al actualizar la reserva: " + e);
         }

@@ -45,12 +45,12 @@ public class CategoriasHotelDao {
         }
     }
     
-    public void eliminarCategoria(int idHotel){
+    public void eliminarCategoria(int idCategoriaHotel){
         
         try (Session sn = HibernateUtilSingle.obtenerSessionFactory().openSession()) {
            
             Transaction tx = sn.beginTransaction();
-            CategoriasHotel cate = sn.find(CategoriasHotel.class, idHotel);
+            CategoriasHotel cate = sn.find(CategoriasHotel.class, idCategoriaHotel);
             if(cate != null){
                 sn.remove(cate);
             }

@@ -26,7 +26,7 @@ public class HabitacionesDao {
         try (Session sn = HibernateUtilSingle.obtenerSessionFactory().openSession()) {
             
             Transaction tx = sn.beginTransaction();
-            sn.persist(sn);
+            sn.persist(habi);
             tx.commit();
         } catch (Exception e) {
             System.out.println("Error al insertar Habitacion: " + e);

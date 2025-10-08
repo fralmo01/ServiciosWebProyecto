@@ -9,6 +9,7 @@ import com.entidades.LoginRequest;
 import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.procedure.ProcedureOutputs;
 import org.hibernate.result.ResultSetOutput;
+import jakarta.persistence.ParameterMode;
 
 public class ClienteDao {
     public List<Cliente> listarClientes(){
@@ -63,8 +64,8 @@ public class ClienteDao {
 
             ProcedureCall sp = sn.createStoredProcedureCall("sp_login", Cliente.class);
 
-            sp.registerParameter(1, String.class , null);
-            sp.registerParameter(2, String.class , null);
+            sp.registerParameter(1, String.class , ParameterMode.IN);
+            sp.registerParameter(2, String.class , ParameterMode.IN);
 
             sp.setParameter(1, consulta.getP_usuario());
             sp.setParameter(2, consulta.getP_pass());
@@ -89,7 +90,7 @@ public class ClienteDao {
             
             ProcedureCall sp = sn.createStoredProcedureCall("sp_buscarCliente", Cliente.class);
             
-            sp.registerParameter(1, Integer.class, null);
+            sp.registerParameter(1, Integer.class, ParameterMode.IN);
             sp.setParameter(1, idCliente);
             
             ProcedureOutputs salidas = sp.getOutputs();
